@@ -1,7 +1,7 @@
 PROGRAM       = run_jcorran
 
 CXX           = g++
-CXXFLAGS      = -g -O3 -Wall -Wno-deprecated
+CXXFLAGS      = -std=c++17 -g -O3 -Wall -Wno-deprecated
 
 # Add JCorran library
 CXXFLAGS     += $(shell jcorran-config-inc)
