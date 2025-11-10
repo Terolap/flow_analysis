@@ -13,7 +13,7 @@ CXXFLAGS += $(shell root-config --cflags)
 LDFLAGS += $(shell root-config --libs)
 
 #Add parquet dependencies
-CXXFLAGS += $(shell pkg-config --cflags parquet)
+# CXXFLAGS += $(shell pkg-config --cflags parquet)
 LDFLAGS += $(shell pkg-config --libs parquet)
 
 MAIN = run_jcorran.cpp
