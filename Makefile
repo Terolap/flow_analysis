@@ -10,7 +10,7 @@ SOFLAGS       = -shared
 
 # Add ROOT dependencies
 CXXFLAGS += $(shell root-config --cflags)
-LDFLAGS += $(shell root-config --libs)
+LDFLAGS += -L/usr/lib64/root -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -lm -ldl -rdynamic
 
 #Add parquet dependencies
 CXXFLAGS += $(shell pkg-config --cflags parquet)
