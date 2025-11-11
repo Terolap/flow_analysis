@@ -1,7 +1,7 @@
 PROGRAM       = run_jcorran
 
 CXX           = g++
-CXXFLAGS      = -std=c++17 -g -O3 -Wall -Wno-deprecated
+CXXFLAGS      = -g -O3 -Wall -Wno-deprecated
 
 # Add JCorran library
 CXXFLAGS     += $(shell jcorran-config-inc)
@@ -13,7 +13,7 @@ CXXFLAGS += $(shell root-config --cflags)
 LDFLAGS += -L/usr/lib64/root -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -pthread -lm -ldl -rdynamic
 
 #Add parquet dependencies
-CXXFLAGS += $(shell pkg-config --cflags parquet)
+# CXXFLAGS += $(shell pkg-config --cflags parquet)
 LDFLAGS += $(shell pkg-config --libs parquet)
 
 MAIN = run_jcorran.cpp
