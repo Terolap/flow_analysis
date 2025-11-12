@@ -191,8 +191,10 @@ int main(int argc, char *argv[]) {
     for(int i = 0; i<argc; i++) {
         if(strcmp(argv[i], "-d") == 0) {
 			directory = argv[i+1];
-        } else if(strcmp(argv[i], "--oversample") == 0) {
-            oversample = std::stoi(argv[i+1]);
+        } else if(strcmp(argv[i], "--oversample_s") == 0) {
+            oversample_s = std::stoi(argv[i+1]);
+        } else if(strcmp(argv[i], "--oversample_e") == 0) {
+            oversample_e = std::stoi(argv[i+1]);
         } else if(strcmp(argv[i], "--number_of_files") == 0) {
             files_num = std::stoi(argv[i+1]);
         } else if(strcmp(argv[i], "--centrality_filename") == 0) {
@@ -211,16 +213,16 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    for(int i=0; i<oversample;i++) {
+    for(int i=oversample_s; i<oversample_e+1;i++) {
 
         std::string files[files_num];
         for(int j = 0; j < files_num; j++){
-            files[j] = directory + filename[j] + std::to_string(i+1) + ".parquet";
+            files[j] = directory + filename[j] + std::to_string(i) + ".parquet";
         }
 
-        std::string cent_file = directory + cent_filename + std::to_string(i+1) + ".parquet";
+        std::string cent_file = directory + cent_filename + std::to_string(i) + ".parquet";
 
-        std::string output_file_s = directory + output_filename + std::to_string(i+1) + ".root";
+        std::string output_file_s = directory + output_filename + std::to_string(i) + ".root";
         const char* output_file = output_file_s.c_str();
         run_code(files, files_num, cent_file, output_file);
     }
