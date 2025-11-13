@@ -183,7 +183,8 @@ int32_t run_code(std::string files[], int files_num, std::string cent_file, cons
 
 int main(int argc, char *argv[]) {
     std::string directory;
-    int oversample;
+    int oversample_s;
+    int oversample_e;
     int files_num;
     std::string cent_filename;
     std::string output_filename;
