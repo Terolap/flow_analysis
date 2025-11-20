@@ -99,7 +99,7 @@ int32_t find_EvtCent(std::string file, int32_t iEvt) {
     return 0;
 }
 
-int32_t run_code(std::string files[], int files_num, std::string cent_file, const char* output_file){
+int32_t run_code(std::string files[], int files_num, std::string cent_file, const char* output_file, int eta_min, int eta_max){
     // Centrality binning
     AliJFFlucAnalysisTProfile::BINNING binning = AliJFFlucAnalysisTProfile::BINNING_CENT_PbPb;
     // Create Analysis object
@@ -110,7 +110,7 @@ int32_t run_code(std::string files[], int files_num, std::string cent_file, cons
 	TDirectory *phydroDir = pfo->mkdir("hydro");
 	pfo->cd("hydro");
     // pfa->AddFlags(AliJFFlucAnalysisTProfile::FLUC_EBE_WEIGHTING);
-    pfa->SetEtaRange(0.4, 0.8);
+    pfa->SetEtaRange(eta_min, eta_max);
     const double vertex[3] = {0.0,0.0,0.0};
 	pfa->SetEventVertex(vertex);
 	pfa->UserCreateOutputObjects();
@@ -183,6 +183,8 @@ int32_t run_code(std::string files[], int files_num, std::string cent_file, cons
 
 int main(int argc, char *argv[]) {
     std::string directory;
+    int eta_min;
+    int eta_max;
     int oversample_s;
     int oversample_e;
     int files_num;
@@ -192,6 +194,10 @@ int main(int argc, char *argv[]) {
     for(int i = 0; i<argc; i++) {
         if(strcmp(argv[i], "-d") == 0) {
 			directory = argv[i+1];
+        } else if(strcmp(argv[i], "--eta_min") == 0) {
+            eta_min = std::stoi(argv[i+1]);
+        } else if(strcmp(argv[i], "--eta_max") == 0) {
+            eta_max = std::stoi(argv[i+1]);
         } else if(strcmp(argv[i], "--oversample_s") == 0) {
             oversample_s = std::stoi(argv[i+1]);
         } else if(strcmp(argv[i], "--oversample_e") == 0) {
@@ -225,7 +231,7 @@ int main(int argc, char *argv[]) {
 
         std::string output_file_s = directory + output_filename + std::to_string(i) + ".root";
         const char* output_file = output_file_s.c_str();
-        run_code(files, files_num, cent_file, output_file);
+        run_code(files, files_num, cent_file, output_file, eta_min, eta_max);
     }
     return 0;
 }
