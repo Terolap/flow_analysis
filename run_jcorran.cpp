@@ -99,7 +99,7 @@ int32_t find_EvtCent(std::string file, int32_t iEvt) {
     return 0;
 }
 
-int32_t run_code(std::string files[], int files_num, std::string cent_file, const char* output_file, int eta_min, int eta_max){
+int32_t run_code(std::string files[], int files_num, std::string cent_file, const char* output_file, double eta_min, double eta_max){
     // Centrality binning
     AliJFFlucAnalysisTProfile::BINNING binning = AliJFFlucAnalysisTProfile::BINNING_CENT_PbPb;
     // Create Analysis object
@@ -183,8 +183,8 @@ int32_t run_code(std::string files[], int files_num, std::string cent_file, cons
 
 int main(int argc, char *argv[]) {
     std::string directory;
-    int eta_min;
-    int eta_max;
+    double eta_min;
+    double eta_max;
     int oversample_s;
     int oversample_e;
     int files_num;
@@ -195,9 +195,9 @@ int main(int argc, char *argv[]) {
         if(strcmp(argv[i], "-d") == 0) {
 			directory = argv[i+1];
         } else if(strcmp(argv[i], "--eta_min") == 0) {
-            eta_min = std::stoi(argv[i+1]);
+            eta_min = std::stod(argv[i+1]);
         } else if(strcmp(argv[i], "--eta_max") == 0) {
-            eta_max = std::stoi(argv[i+1]);
+            eta_max = std::stod(argv[i+1]);
         } else if(strcmp(argv[i], "--oversample_s") == 0) {
             oversample_s = std::stoi(argv[i+1]);
         } else if(strcmp(argv[i], "--oversample_e") == 0) {
