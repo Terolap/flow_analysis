@@ -75,7 +75,6 @@ int32_t find_curEvt(std::string file) {
     return curEvt;
 }
 
-// KESKEN
 int32_t find_EvtCent(std::string file, int32_t iEvt) {
     // Opening parquet file
     std::shared_ptr<arrow::io::ReadableFile> infile;
